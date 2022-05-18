@@ -40,19 +40,19 @@ model_restoration.cuda()
 model_restoration = nn.DataParallel(model_restoration)
 model_restoration.eval()
 
-datasets = ['Rain100L', 'Rain100H', 'Test100', 'Test1200', 'Test2800']
-# datasets = ['Rain100L']
+datasets = ['Test100', 'Rain100H', 'Rain100L', 'Test1200']#, 'Test2800']
 
 for dataset in datasets:
     rgb_dir_test = os.path.join(args.input_dir, dataset, 'input')
     test_dataset = get_test_data(rgb_dir_test, img_options={})
-    test_loader  = DataLoader(dataset=test_dataset, batch_size=1, shuffle=False, num_workers=4, drop_last=False, pin_memory=True)
+    test_loader  = DataLoader(dataset=test_dataset, batch_size=1, shuffle=False, num_workers=0, drop_last=False, pin_memory=True)
 
     result_dir  = os.path.join(args.result_dir, dataset)
     utils.mkdir(result_dir)
 
     with torch.no_grad():
-        for ii, data_test in enumerate(tqdm(test_loader), 0):
+        for data_test in tqdm(test_loader):
+            
             torch.cuda.ipc_collect()
             torch.cuda.empty_cache()
             
