@@ -9,7 +9,7 @@ def torchPSNR(tar_img, prd_img):
     return ps
 
 def save_img(filepath, img):
-    cv2.imwrite(filepath,cv2.cvtColor(img, cv2.COLOR_RGB2BGR))
+    cv2.imwrite(filepath, cv2.cvtColor(img, cv2.COLOR_RGB2BGR))
 
 def numpyPSNR(tar_img, prd_img):
     imdff = np.float32(prd_img) - np.float32(tar_img)

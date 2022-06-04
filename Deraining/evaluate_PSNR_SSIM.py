@@ -1,7 +1,5 @@
 import numpy as np
 import cv2
-import math
-import os
 from tqdm import tqdm
 
 def calculate_psnr(img1, img2):
@@ -13,7 +11,7 @@ def calculate_psnr(img1, img2):
     mse = np.mean((img1 - img2)**2)
     if mse == 0:
         return float('inf')
-    return 20 * math.log10(255.0 / math.sqrt(mse))
+    return 20 * np.log10(255.0 / np.sqrt(mse))
 
 def calculate_ssim(img1, img2):
     if not img1.shape == img2.shape:
@@ -57,22 +55,22 @@ def ssim(img1, img2):
 def load_img(filepath):
     return cv2.cvtColor(cv2.imread(filepath), cv2.COLOR_BGR2RGB)
 
-datasets = ['Rain100L', 'Rain100H', 'Test100', 'Test1200']
-psnr = {ds : [] for ds in datasets}
-ssim = {ds : [] for ds in datasets}
+# datasets = ['Rain100L', 'Rain100H', 'Test100', 'Test1200']
+# psnr = {ds : [] for ds in datasets}
+# ssim = {ds : [] for ds in datasets}
 
-for dataset in datasets:
-    output_dir = f'./Datasets/test/{dataset}/target/'
-    target_dir = f'./Results/{dataset}/'
+# for dataset in datasets:
+#     output_dir = f'./Datasets/test/{dataset}/target/'
+#     target_dir = f'./Results/{dataset}/'
 
-    out_images = [output_dir + i for i in os.listdir(target_dir) if i.endswith(('jpeg', 'png', 'jpg',"PNG","JPEG","JPG"))]
-    tar_images = [target_dir + i for i in os.listdir(target_dir) if i.endswith(('jpeg', 'png', 'jpg',"PNG","JPEG","JPG"))]
+#     out_images = [output_dir + i for i in os.listdir(target_dir) if i.endswith(('jpeg', 'png', 'jpg',"PNG","JPEG","JPG"))]
+#     tar_images = [target_dir + i for i in os.listdir(target_dir) if i.endswith(('jpeg', 'png', 'jpg',"PNG","JPEG","JPG"))]
 
-    for out_file, tar_file in tqdm(zip(out_images, tar_images)):
-        out_img = load_img(out_file)
-        tar_img = load_img(tar_file)
-        psnr[dataset].append(calculate_psnr(out_img, tar_img))
-        ssim[dataset].append(calculate_ssim(out_img, tar_img))
+#     for out_file, tar_file in tqdm(zip(out_images, tar_images)):
+#         out_img = load_img(out_file)
+#         tar_img = load_img(tar_file)
+#         psnr[dataset].append(calculate_psnr(out_img, tar_img))
+#         ssim[dataset].append(calculate_ssim(out_img, tar_img))
     
-    print(dataset, np.mean(psnr[dataset]), np.mean(ssim[dataset]))
+#     print(dataset, np.mean(psnr[dataset]), np.mean(ssim[dataset]))
     

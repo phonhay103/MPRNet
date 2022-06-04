@@ -1,6 +1,5 @@
-import os
-from natsort import natsorted
-from glob import glob
+# from natsort import natsorted
+from pathlib import Path
 
 def mkdirs(paths):
     if isinstance(paths, list) and not isinstance(paths, str):
@@ -10,9 +9,8 @@ def mkdirs(paths):
         mkdir(paths)
 
 def mkdir(path):
-    if not os.path.exists(path):
-        os.makedirs(path)
+    Path(path).mkdir(exist_ok=True)
 
-def get_last_path(path, session):
-	x = natsorted(glob(os.path.join(path,'*%s'%session)))[-1]
-	return x
+# def get_last_path(path, session):
+# 	x = natsorted(glob(os.path.join(path,'*%s'%session)))[-1]
+# 	return x
