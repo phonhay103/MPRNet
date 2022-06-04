@@ -1,5 +1,5 @@
 
-## Training
+<!-- ## Training
 - Download the [Datasets](Datasets/README.md)
 
 - Train the model with default arguments by running
@@ -7,20 +7,31 @@
 ```
 python train.py
 ```
+-->
 
+## Pre-requisites
+The project was developed using python 3 with the following packages.
+- Pytorch
+- Opencv
+- Numpy
+- Scikit-image
+- Pillow
+
+1. Install [Pytorch](https://pytorch.org/get-started/locally/)
+2. Install with pip:
+```bash
+pip install -r requirements.txt
+```
+
+## Datasets
+- Rain 13k - Test: [Here](https://drive.google.com/drive/folders/1PDWggNh8ylevFmrjo-JEvlmqsDlWWvZs)
+- Place it in `datasets`
 
 ## Evaluation
-
-1. Download the [model](https://drive.google.com/file/d/1O3WEJbcat7eTY6doXWeorAbQ1l_WmMnM/view?usp=sharing) and place it in `./pretrained_models/`
-
-2. Download test datasets (Test100, Rain100H, Rain100L, Test1200, Test2800) from [here](https://drive.google.com/drive/folders/1PDWggNh8ylevFmrjo-JEvlmqsDlWWvZs?usp=sharing) and place them in `./Datasets/Synthetic_Rain_Datasets/test/`
-
-3. Run
 ```
 python test.py
 ```
-
-#### To reproduce PSNR/SSIM scores of the paper, run
+or
 ```
-evaluate_PSNR_SSIM.m 
+python test.py --weights <model_weights> --input_dir <input_path> --result_dir <result_path>
 ```
