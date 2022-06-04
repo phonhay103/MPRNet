@@ -1,6 +1,12 @@
-.ipynb_checkpoints/
+.ipynb_checkpoints
+*/.ipynb_checkpoints
+
+__pycache__
+*/__pycache__
+*/*/__pycache__
+
 *.pyc
 .DS_Store
-Deraining/Datasets/
-Deraining/pretrained_models/
-Deraining/results/
+
+Deraining/datasets
+Deraining/results
