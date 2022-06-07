@@ -41,11 +41,11 @@ parser = argparse.ArgumentParser(description='Image Deraining using MPRNet')
 parser.add_argument('--input_dir', default='datasets/Test100/input', type=str, help='Directory of validation images')
 parser.add_argument('--result_dir', default='results', type=str, help='Directory for results')
 parser.add_argument('--weights', default='./pretrained/deraining.pth', type=str, help='Path to weights')
-parser.add_argument('--gpus', default='0', type=str, help='CUDA_VISIBLE_DEVICES')
+parser.add_argument('--gpus', default='0', type=str, help='CUDA_VISIBLE_DEVICES') #
 args = parser.parse_args()
 
-os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"
-os.environ["CUDA_VISIBLE_DEVICES"] = args.gpus
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID" #
+os.environ["CUDA_VISIBLE_DEVICES"] = args.gpus #
 
 model_restoration = MPRNet()
 utils.load_checkpoint(model_restoration, args.weights)
@@ -67,5 +67,5 @@ with torch.no_grad():
         restored_ = restored_.permute(0, 2, 3, 1).cpu().detach().numpy()
 
         for restored in restored_:
-            restored = img_as_ubyte(restored)
-            utils.save_img(Path(args.result_dir, img_name[0]).as_posix(), restored)
+            restored = img_as_ubyte(restored) #
+            utils.save_img(Path(args.result_dir, img_name[0]).as_posix(), restored) #
